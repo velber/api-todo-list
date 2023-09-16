@@ -6,9 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use App\Repositories\Contracts\TasksRepositoryInterface;
 
 class TaskController extends Controller
 {
+    /**
+     * Constructor.
+     */
+    public function __construct(protected TasksRepositoryInterface $tasksRepository)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      */
