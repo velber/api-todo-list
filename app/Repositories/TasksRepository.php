@@ -8,6 +8,11 @@ use App\Repositories\Contracts\TasksRepositoryInterface;
 
 class TasksRepository implements TasksRepositoryInterface
 {
+    public function getTasks(User $user): mixed
+    {
+        return $user->tasks;
+    }
+
     public function create(User $user, array $data): Task
     {
         return $user->tasks()->create(array_merge($data, [
