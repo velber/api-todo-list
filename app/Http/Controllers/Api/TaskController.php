@@ -45,7 +45,11 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $this->authorize('update', $task);
+
+        $this->tasksRepository->update($task, $request->validated());
+
+        return response()->noContent();
     }
 
     /**

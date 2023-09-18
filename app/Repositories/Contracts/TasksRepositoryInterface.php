@@ -11,4 +11,6 @@ interface TasksRepositoryInterface
     public function getTasks(User $user): mixed;
 
     public function create(User $user, array $data): Task;
+
+    public function update(Task $task, array $data): void;
 }
