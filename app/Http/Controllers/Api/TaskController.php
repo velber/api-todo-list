@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Task;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TaskResource;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Models\Task;
 use App\Repositories\Contracts\TasksRepositoryInterface;
 
 class TaskController extends Controller
@@ -31,7 +32,9 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        $task = $this->tasksRepository->create($request->user(), $request->validated());
+
+        return new TaskResource($task);
     }
 
     /**

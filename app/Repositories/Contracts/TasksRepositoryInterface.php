@@ -2,9 +2,10 @@
 
 namespace App\Repositories\Contracts;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Task;
 
 interface TasksRepositoryInterface
 {
-    public function create(): Model;
+    public function create(User $user, array $data): Task;
 }

@@ -11,6 +11,13 @@ class Task extends Model
 {
     use HasFactory;
 
+  /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * The attributes that should be cast.
      *
@@ -19,5 +26,18 @@ class Task extends Model
     protected $casts = [
         'status' => TasksStatusEnum::class,
         'priority' => TasksPriorityEnum::class,
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'priority',
+        'parent_task_id',
+        'createdAt',
     ];
 }

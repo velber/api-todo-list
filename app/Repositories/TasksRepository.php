@@ -3,15 +3,16 @@
 namespace App\Repositories;
 
 use App\Models\Task;
+use App\Models\User;
 use App\Repositories\Contracts\TasksRepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 
 class TasksRepository implements TasksRepositoryInterface
 {
-    public function create(): Model
+    public function create(User $user, array $data): Task
     {
-        // create Task
-
-        return new Task();
+        return $user->tasks()->create(array_merge($data, [
+            'createdAt' => now(),
+        ]))
+            ->refresh();
     }
 }

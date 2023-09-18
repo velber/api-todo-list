@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\TasksPriorityEnum;
+use App\Rules\ParentTaskIdRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTaskRequest extends FormRequest
@@ -11,7 +13,7 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,10 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'priority' => 'required|in:' . implode(',', array_column(TasksPriorityEnum::cases(), 'value')),
+            'parent_task_id' => ['nullable', 'integer', 'exists:tasks,id', new ParentTaskIdRule],
         ];
     }
 }

@@ -9,14 +9,6 @@ use Illuminate\Auth\Access\Response;
 class TaskPolicy
 {
     /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can update the model.
      */
     public function update(User $user, Task $task): bool

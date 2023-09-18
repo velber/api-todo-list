@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->unsignedTinyInteger('priority')->default(TasksPriorityEnum::ONE);
+            $table->unsignedTinyInteger('priority')->default(TasksPriorityEnum::ONE->value);
             $table->string('status')->default(TasksStatusEnum::Todo->value);
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('parent_task_id')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->timestamp('completedAt');
+            $table->timestamp('completedAt')->nullable();
             $table->timestamp('createdAt');
 
             // add foreign key constrains on users
