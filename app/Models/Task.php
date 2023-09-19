@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Enums\TasksPriorityEnum;
+use App\Models\User;
 use App\Enums\TasksStatusEnum;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\TasksPriorityEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
 {
@@ -40,4 +41,14 @@ class Task extends Model
         'parent_task_id',
         'createdAt',
     ];
+
+    public function isCompleted(): bool
+    {
+        return $this->status === TasksStatusEnum::Done;
+    }
+
+    public function isUserOwner(User $user): bool
+    {
+        return $user->id === $this->user_id;
+    }
 }

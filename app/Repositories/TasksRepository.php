@@ -30,4 +30,9 @@ class TasksRepository implements TasksRepositoryInterface
             'parent_task_id' => $data['parent_task_id'],
         ]);
     }
+
+    public function delete(Task $task): void 
+    {
+        $task->delete();
+    }
 }
