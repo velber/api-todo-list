@@ -19,7 +19,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('tasks', TaskController::class)->only([
         'index', 'store', 'update', 'destroy'
     ]);
-     
-    Route::post('tasks/complete',  [TaskController::class, 'complete'])
-                ->name('tasks.complete');
+
+    Route::patch('tasks/{task}/complete',  [TaskController::class, 'complete'])
+        ->can('complete', 'task')
+        ->name('tasks.complete');
 });

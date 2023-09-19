@@ -38,6 +38,7 @@ class Task extends Model
         'title',
         'description',
         'priority',
+        'status',
         'parent_task_id',
         'createdAt',
     ];
