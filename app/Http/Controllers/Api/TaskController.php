@@ -10,6 +10,7 @@ use App\Http\Resources\TaskResource;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Repositories\Contracts\TasksRepositoryInterface;
+use App\Repositories\SortAndFilter;
 
 class TaskController extends Controller
 {
@@ -26,9 +27,10 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = $this->tasksRepository->getTasks($request->user());
-
-        return TaskResource::collection($tasks);
+        $sortAndFilter = new SortAndFilter($request);
+        $tasksListQuery = $this->tasksRepository->getTasksListQuery($request->user(), $sortAndFilter);
+        
+        return TaskResource::collection($tasksListQuery->paginate(25));
      }
 
     /**

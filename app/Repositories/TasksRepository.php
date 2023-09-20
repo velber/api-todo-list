@@ -2,16 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Enums\TasksStatusEnum;
 use App\Models\Task;
 use App\Models\User;
+use App\Enums\TasksStatusEnum;
+use App\Repositories\Contracts\SortAndFilterInterface;
 use App\Repositories\Contracts\TasksRepositoryInterface;
+use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
 
 class TasksRepository implements TasksRepositoryInterface
 {
-    public function getTasks(User $user): mixed
+    public function getTasksListQuery(User $user, SortAndFilterInterface $sortAndFilter): QueryBuilder
     {
-        return $user->tasks;
+        $query = $user->tasks();
+
+        $sortAndFilter->applySearch($query)
+            ->applySort($query)
+            ->applyFilter($query);
+
+        return $query;
     }
 
     public function create(User $user, array $data): Task
@@ -38,7 +46,7 @@ class TasksRepository implements TasksRepositoryInterface
 
         $subtasks = Task::select('id', 'status')
             ->whereIn('parent_task_id', $parentTaskIds)
-            ->get(); 
+            ->get();
 
         if ($subtasks->count() === 0) {
             return false;
@@ -47,8 +55,8 @@ class TasksRepository implements TasksRepositoryInterface
         // if task has any uncompleted subtask
         if ($subtasks->firstWhere('status', TasksStatusEnum::Todo)) {
             return true;
-        } 
-        
+        }
+
         return $this->doesTaskHaveUncompletedSubtasks($subtasks->pluck('id')->toArray());
     }
 }

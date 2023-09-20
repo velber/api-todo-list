@@ -2,13 +2,17 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Models\User;
 use App\Models\Task;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\User;
+use App\Repositories\Contracts\SortAndFilterInterface;
+use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
 
 interface TasksRepositoryInterface
 {
-    public function getTasks(User $user): mixed;
+    public function getTasksListQuery(
+        User $user,
+        SortAndFilterInterface $sortAndFilterInterface
+    ): QueryBuilder;
 
     public function create(User $user, array $data): Task;
 
