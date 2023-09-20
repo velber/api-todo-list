@@ -41,6 +41,7 @@ class Task extends Model
         'status',
         'parent_task_id',
         'createdAt',
+        'completedAt',
     ];
 
     public function isCompleted(): bool

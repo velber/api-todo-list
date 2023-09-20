@@ -69,6 +69,7 @@ class TaskController extends Controller
     {
         $this->tasksRepository->update($task, [
             'status' => TasksStatusEnum::Done,
+            'completedAt' => now(),
         ]);
     }
 }
