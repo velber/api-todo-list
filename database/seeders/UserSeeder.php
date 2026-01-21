@@ -12,10 +12,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $user = User::factory()
+            ->hasTasks(5)
+            ->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+            ]);
         $token = $user->createToken('Bearer Token');
 
         $this->command->line('Test user has been created: ' . $user->email);

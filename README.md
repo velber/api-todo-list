@@ -8,12 +8,11 @@ A simple API for managing todo list. Based on Laravel framework version 10.
 3. If you haven't built the image before run `./vendor/bin/sail build --no-cache`.
 4. Run `./vendor/bin/sail up` to start the server.
 5. Run `./vendor/bin/sail php -v` to check php version.
-6. Run `./vendor/bin/sail artisan migrate` to create database tables.
-7. Run `./vendor/bin/sail artisan db:seed` to create test user with a Bearer token, it will display the email
-   password and token of test user in the console.
-8. Open `http://localhost` in your browser and login with credentials.
-9. Via Postman in Authorization tab, select Bearer Token and paste the token.
-10. Send GET request to `/tasks` to get a list of tasks.
+6. Run `./vendor/bin/sail artisan migrate --seed` to create database tables and test user with a Bearer token.
+   It will display the email password and token of the test user in the console.
+7. Open `http://localhost` in your browser and login with credentials.
+8. Via Postman in Authorization tab, select Bearer Token and paste the token.
+9. Send GET request to `/tasks` to get a list of tasks.
 
 ## Authentication
 This App uses Laravel Sanctum authentication system to make requests as auth user. 
@@ -24,7 +23,7 @@ To create a new user, use web routes and then create a token using `tinker`
     echo $token->plainTextToken;
 ```
 or with in seeding the database with `./vendor/bin/sail artisan db:seed` command.
-After that you can use the token for authorization in header. 
+After that you can use the token for authorization in the header. 
 `plainTextToken` is shown only once while creating a new token.
 
 ## API Endpoints
