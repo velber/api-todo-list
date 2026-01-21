@@ -1,6 +1,6 @@
 # Todo List API
 ## Introduction
-A simple API for managing todo list. Based on Laravel framework version 10.
+A simple API for managing todo list. Based on Laravel framework version 12.
 
 ## Installation
 1. Clone the repository.
