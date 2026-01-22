@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -36,5 +37,25 @@ class Handler extends ExceptionHandler
                 ], 422);
             }
         });
+
+        $this->renderable(function (AuthorizationException $e, Request $request) {
+            // AccessDeniedHttpException it doesn't handle AuthorizationException here
+            // but do matches Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException instead
+        });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     */
+    public function render($request, Throwable $e)
+    {
+        if (in_array('api', $request->route()->computedMiddleware)) {
+            return match(true) {
+                $e instanceof AuthorizationException => response()->json(['message' => $e->getMessage()], 403),
+                default => parent::render($request, $e),
+            };
+        }
+
+        return parent::render($request, $e);
     }
 }
