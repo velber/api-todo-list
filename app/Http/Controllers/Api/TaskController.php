@@ -29,7 +29,7 @@ class TaskController extends Controller
     {
         $sortAndFilter = new SortAndFilter($request);
         $tasksListQuery = $this->tasksRepository->getTasksListQuery($request->user(), $sortAndFilter);
-        
+
         return TaskResource::collection($tasksListQuery->paginate(25));
      }
 
@@ -48,8 +48,6 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        $this->authorize('update', $task);
-
         $this->tasksRepository->update($task, $request->validated());
 
         return response()->noContent();
