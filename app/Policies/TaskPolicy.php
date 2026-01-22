@@ -11,10 +11,7 @@ class TaskPolicy
     /**
      * Constructor.
      */
-    public function __construct(protected TasksRepositoryInterface $tasksRepository)
-    {
-        //
-    }
+    public function __construct(protected TasksRepositoryInterface $tasksRepository){}
 
     /**
      * Determine whether the user can update the model.
@@ -29,6 +26,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
+        // TODO move logic to request that does not relate to policy
         return $this->update($user, $task) && !$task->isCompleted();
     }
 
@@ -37,6 +35,7 @@ class TaskPolicy
      */
     public function complete(User $user, Task $task): bool
     {
+        // TODO the same as above
         return $this->update($user, $task)
             && !$this->tasksRepository->doesTaskHaveUncompletedSubtasks($task->id);
     }

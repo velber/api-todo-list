@@ -17,10 +17,7 @@ class TaskController extends Controller
     /**
      * Constructor.
      */
-    public function __construct(protected TasksRepositoryInterface $tasksRepository)
-    {
-        //
-    }
+    public function __construct(protected TasksRepositoryInterface $tasksRepository){}
 
     /**
      * Display a listing of the resource.
@@ -63,6 +60,10 @@ class TaskController extends Controller
         $this->tasksRepository->delete($task);
     }
 
+    /**
+     * Mark the specified task as complete.
+     * The Authorize is applied in the router.
+     */
     public function complete(Task $task)
     {
         $this->tasksRepository->update($task, [
