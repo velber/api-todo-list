@@ -26,8 +26,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        // TODO move logic to request that does not relate to policy
-        return $this->update($user, $task) && !$task->isCompleted();
+        return $this->update($user, $task);
     }
 
     /**
@@ -35,8 +34,6 @@ class TaskPolicy
      */
     public function complete(User $user, Task $task): bool
     {
-        // TODO the same as above
-        return $this->update($user, $task)
-            && !$this->tasksRepository->doesTaskHaveUncompletedSubtasks($task->id);
+        return $this->update($user, $task);
     }
 }

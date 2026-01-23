@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -51,6 +52,7 @@ class Handler extends ExceptionHandler
     {
         if (in_array('api', $request->route()->computedMiddleware)) {
             return match(true) {
+                $e instanceof HttpException => response()->json(['message' => $e->getMessage()], 400),
                 $e instanceof AuthorizationException => response()->json(['message' => $e->getMessage()], 403),
                 default => parent::render($request, $e),
             };

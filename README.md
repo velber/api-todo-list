@@ -38,3 +38,7 @@ Search, sorting and filters can be applied to get the list of tasks, add the fol
   - `search={value}` - specified needed value.
   - `sort={value}` - where value is needed field. To specify asc/desc sorting, add `-` to the begining of value, for example `-completedAt`
   - `filter[name]={value}` and `filter[value]={value}` - to apply filters.
+
+## TODO
+ - Use new PHP 8.5 and Laravel 12 features
+ - Think the best way to validate the model state before perform different actions on it

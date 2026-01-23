@@ -49,6 +49,11 @@ class Task extends Model
         return $this->status === TasksStatusEnum::Done;
     }
 
+    public function isDeletable(): bool
+    {
+        return !$this->isCompleted();
+    }
+
     public function isUserOwner(User $user): bool
     {
         return $user->id === $this->user_id;

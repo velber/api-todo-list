@@ -57,6 +57,11 @@ class TaskController extends Controller
     {
         $this->authorize('delete', $task);
 
+        // check if the task state is fine to be deleted
+        if (!$task->isDeletable()) {
+            abort(400, 'The completed task cannot be deleted.');
+        }
+
         $this->tasksRepository->delete($task);
     }
 
@@ -66,6 +71,11 @@ class TaskController extends Controller
      */
     public function complete(Task $task)
     {
+        // check if the task state is fine to be deleted
+        if ($this->tasksRepository->doesTaskHaveUncompletedSubtasks($task->id)) {
+            abort(400, 'The task cannot be deleted since it has uncompleted subtasks.');
+        }
+
         $this->tasksRepository->update($task, [
             'status' => TasksStatusEnum::Done,
             'completedAt' => now(),
