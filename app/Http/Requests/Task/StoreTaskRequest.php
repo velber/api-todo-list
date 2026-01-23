@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Task;
 
 use App\Enums\TasksPriorityEnum;
 use App\Rules\ParentTaskIdRule;

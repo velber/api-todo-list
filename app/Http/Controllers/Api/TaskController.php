@@ -7,8 +7,8 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Repositories\Contracts\TasksRepositoryInterface;
 use App\Repositories\SortAndFilter;
 
