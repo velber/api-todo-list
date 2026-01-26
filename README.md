@@ -40,5 +40,7 @@ Search, sorting and filters can be applied to get the list of tasks, add the fol
   - `filter[name]={value}` and `filter[value]={value}` - to apply filters.
 
 ## TODO
- - Use new PHP 8.5 and Laravel 12 features
- - Think the best way to validate the model state before perform different actions on it
+ - Use new PHP and Laravel features
+ - Think the best way to validate the model state before perform different actions on it, it should be reusable in 
+   controller and in views as well. Maybe it can be done like Gate policies.
+ - Refactor Sort And Filter logic, separate query building from the repository.

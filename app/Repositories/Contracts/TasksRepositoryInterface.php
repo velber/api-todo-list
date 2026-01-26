@@ -4,14 +4,13 @@ namespace App\Repositories\Contracts;
 
 use App\Models\Task;
 use App\Models\User;
-use App\Repositories\Contracts\SortAndFilterInterface;
 use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
 
 interface TasksRepositoryInterface
 {
     public function getTasksListQuery(
         User $user,
-        SortAndFilterInterface $sortAndFilterInterface
+        SortAndFilterInterface $sortAndFilter
     ): QueryBuilder;
 
     public function create(User $user, array $data): Task;
