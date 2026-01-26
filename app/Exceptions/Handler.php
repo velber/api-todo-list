@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      * @throws Throwable
      */
-    public function render($request, Throwable $e): Response|JsonResponse
+    public function render($request, Throwable $e): Response|JsonResponse|RedirectResponse
     {
         if (in_array('api', $request->route()->computedMiddleware)) {
             return match(true) {
